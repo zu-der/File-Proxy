@@ -15,6 +15,7 @@
             _("show").style.opacity = '1';
             _("start").style.visibility = 'visible';
             _("name").innerHTML = _("file").files[0].name;
+            console.log(_("file").files[0].name);
             var formdata = new FormData();
             formdata.append("files", _("file").files[0]);
             var xhttp = new XMLHttpRequest();
@@ -23,6 +24,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                 	_("file").value = "";
                     _("value").style.backgroundColor = 'green';
+	            console.log("Successfully uploaded!");
                     setTimeout(function() {
                     	_("value").style.width = "0px";
                         _("value").style.backgroundColor = 'cornflowerblue';
