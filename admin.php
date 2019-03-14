@@ -1,5 +1,7 @@
 <html>
-<head><title>Admin Page</title></head>
+<head>
+<link rel = "shortcut icon" href="file.png">
+<title>Admin Page</title></head>
 <body style="background-image:linear-gradient(45deg, #f2f2f2,white)">
 <?php
   $file = "";
