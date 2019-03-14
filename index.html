@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel = "shortcut icon" href="file.png">
+    <title>File Proxy</title>
+</head>
+<script>
+    function _(elem) {
+        return document.getElementById(elem);
+    }
+
+    function ch() {
+        var k = _("file").value;
+        if (k != "") {
+            _("show").style.opacity = '1';
+            _("start").style.visibility = 'visible';
+            _("name").innerHTML = _("file").files[0].name;
+            var formdata = new FormData();
+            formdata.append("files", _("file").files[0]);
+            var xhttp = new XMLHttpRequest();
+            xhttp.upload.addEventListener('progress', progressHandler,false);
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                	_("file").value = "";
+                    _("value").style.backgroundColor = 'green';
+                    setTimeout(function() {
+                    	_("value").style.width = "0px";
+                        _("value").style.backgroundColor = 'cornflowerblue';
+                        _("show").style.opacity = '0';
+                        _("start").style.visibility = 'hidden';
+                        _("complete").style.opacity = "1";
+                        setTimeout(com,3000);
+                    }, 2500);
+                }
+                function com(){
+                    _("complete").style.opacity = "0";
+                }
+            }
+            xhttp.open("POST", "index.php");
+            xhttp.send(formdata);
+        } else {
+            _("show").style.opacity = '0';
+            _("start").style.visibility = 'hidden';
+            _("file").value = "";
+            _("value").style.width = "0px";
+        }
+    }
+
+    function progressHandler(event) {
+        var el = event.loaded;
+        var et = event.total;
+        var percent = (el / et) * 100;
+        _("value").style.width = Math.round(percent) + "%";
+    }
+</script>
+<style>
+    body {
+        margin: 0;
+    }
+    
+    .logo{
+    	width:40px;
+    	height:40px;
+    }
+    .upload-tab {
+        height: 100vh;
+        width: 100vw;
+        cursor: hand;
+    }
+    
+    .placeholder {
+        height: 90%;
+        cursor: hand;
+    }
+    
+    .file-area {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border: 4px solid lightgray;
+        cursor: hand;
+        background-color: rgb(250, 250, 250);
+    }
+    
+    .file-area:hover {
+        border: 4px dashed black;
+    }
+    
+    .title {
+        font-family: Segoe Ui;
+        color: gray;
+    }
+    
+    .info {
+        font-family: Trebuchet MS;
+        color: #2a2b2d;
+        font-style: italic;
+    }
+    
+    .upload-button {
+        background-image: linear-gradient(45deg, powderblue, cornflowerblue);
+        font-family: tahoma;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        border: 0px;
+        padding: 5px;
+        border-radius: 5px;
+        border:2px solid black;
+    }
+    
+    #show {
+        font-weight: bold;
+        position: relative;
+        top: -30px;
+        color: maroon;
+        font-style: italic;
+        font-size: 15px;
+        font-family: segoe ui;
+        opacity: 0;
+        transition: 1s;
+    }
+    
+    #file {
+        position: relative;
+        top: -35px;
+        height: 35px;
+        width: 300px;
+        cursor: hand;
+        opacity: 0;
+        animation-duration: 1s;
+    }
+    
+    .upload-stats {
+        background-color: #f2f2f2;
+        box-sizing: border-box;
+        border-top: 2px solid lightgray;
+        box-shadow: 0px -2px 0px 0px gray;
+    }
+    
+    .upload-indicator {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #start {
+        visibility: hidden;
+    }
+    
+    .file-details {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .file-name {
+        font-family: tahoma;
+        padding-left: 10px;
+        font-weight: bold;
+        height: 15px;
+        font-size: 15px;
+        color: rgb(40, 40, 40);
+        font-style: italic;
+        border-bottom: 1px solid lightgray;
+    }
+    
+    #loader {
+        padding-left: 1%;
+    }
+    
+    .progress {
+        border: 1px solid gray;
+        border-radius: 10px;
+        width: 99%;
+        height: 95%;
+    }
+    
+    .value {
+        box-sizing: border-box;
+        background-color: cornflowerblue;
+        border-radius: 8px;
+        height: 100%;
+        width:0px;
+    }
+    .success{
+        position:fixed;
+        bottom:0px;
+        left:0px;
+        width:100%;
+        height:10%;
+    }
+    #complete{
+    	transition:1s;
+    	opacity:0;
+    	background-color:#f2f2f2;
+    }
+    .success-details{
+        width:100%;
+        height:100%;
+        font-family:tahoma;
+        font-style:italic;
+        font-weight:bold;
+        font-size:20px;
+        color:gray;
+    }
+</style>
+
+<body>
+    <table class="upload-tab" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="placeholder">
+                <div class="file-area">
+                    <table style="width:100%;height:100%">
+                        <tr>
+                            <td>
+                                <center>
+                                    <h1 class="title"><i>Welcome to File <font color="orange">Proxy</font></i></h1> <img src="file.png" class="logo">
+                                </center>
+                                <center>
+                                    <h3 class="info">Please click to Select a File</h3>
+                                </center>
+                                <br>
+                                <form method="post" enctype="multipart/form-data">
+                                <center><button class="upload-button">Choose File</button></center>
+                                <center><input type="file" id="file" onchange="ch()"></center>
+                                <center><label id="show">___ File Chosen ___</label></center>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="upload-stats">
+                <div class="upload-indicator" id="start">
+                    <table class="file-details">
+                        <tr>
+                            <td class="file-name" id="name">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="loader">
+                                <div class="progress">
+                                    <div class="value" id="value"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="success" id="complete">
+    	<table class="success-details">
+    		<tr>
+    			<td>
+    				<center>Thank you for sharing a File!</center>
+    			</td>
+    		</tr>
+    </div>
+</body>
+
+</html>
