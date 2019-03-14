@@ -79,18 +79,19 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        border: 4px solid lightgray;
+        border: 3px solid lightgray;
         cursor: hand;
         background-color: rgb(250, 250, 250);
     }
     
     .file-area:hover {
-        border: 4px dashed black;
+        background-image: linear-gradient(45deg, white, lightgrey);
+        border:4px solid orange;
     }
     
     .title {
         font-family: Segoe Ui;
-        color: gray;
+        color: black;
     }
     
     .info {
@@ -105,10 +106,10 @@
         font-size: 20px;
         font-weight: bold;
         color: white;
+        text-shadow: grey 1px 1px;
         border: 0px;
         padding: 5px;
-        border-radius: 5px;
-        border:2px solid black;
+        border-radius: 10px;
     }
     
     #show {
@@ -136,8 +137,7 @@
     .upload-stats {
         background-color: #f2f2f2;
         box-sizing: border-box;
-        border-top: 2px solid lightgray;
-        box-shadow: 0px -2px 0px 0px gray;
+        border-top: 1px solid lightgray;
     }
     
     .upload-indicator {
@@ -215,16 +215,18 @@
                         <tr>
                             <td>
                                 <center>
-                                    <h1 class="title"><i>Welcome to File <font color="orange">Proxy</font></i></h1> <img src="file.png" class="logo">
+                                     <img src="file.png" class="logo">
+                                    <h1 class="title"><i> <font color="gray">File</font><font color="orange">Proxy</font></i></h1>
                                 </center>
+                                <br>
                                 <center>
-                                    <h3 class="info">Please click to Select a File</h3>
+                                    <h3 class="info">Please Select a File to Upload</h3>
                                 </center>
                                 <br>
                                 <form method="post" enctype="multipart/form-data">
                                 <center><button class="upload-button">Choose File</button></center>
                                 <center><input type="file" id="file" onchange="ch()"></center>
-                                <center><label id="show">___ File Chosen ___</label></center>
+                                <center><label id="show"> File Chosen . </label></center>
                                 </form>
                             </td>
                         </tr>
