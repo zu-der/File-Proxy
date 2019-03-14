@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link rel = "shortcut icon" href="file.png">
+    <link rel = "shortcut icon" href="file.png">
     <title>File Proxy</title>
 </head>
 <script>
@@ -22,11 +22,11 @@
             xhttp.upload.addEventListener('progress', progressHandler,false);
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                	_("file").value = "";
+                    _("file").value = "";
                     _("value").style.backgroundColor = 'green';
-	            console.log("Successfully uploaded!");
+                console.log("Successfully uploaded!");
                     setTimeout(function() {
-                    	_("value").style.width = "0px";
+                        _("value").style.width = "0px";
                         _("value").style.backgroundColor = 'cornflowerblue';
                         _("show").style.opacity = '0';
                         _("start").style.visibility = 'hidden';
@@ -38,7 +38,7 @@
                     _("complete").style.opacity = "0";
                 }
             }
-            xhttp.open("POST", "index.php");
+            xhttp.open("POST", "add.php");
             xhttp.send(formdata);
         } else {
             _("show").style.opacity = '0';
@@ -61,8 +61,8 @@
     }
     
     .logo{
-    	width:40px;
-    	height:40px;
+        width:40px;
+        height:40px;
     }
     .upload-tab {
         height: 100vh;
@@ -191,9 +191,9 @@
         height:10%;
     }
     #complete{
-    	transition:1s;
-    	opacity:0;
-    	background-color:#f2f2f2;
+        transition:1s;
+        opacity:0;
+        background-color:#f2f2f2;
     }
     .success-details{
         width:100%;
@@ -256,12 +256,12 @@
         </tr>
     </table>
     <div class="success" id="complete">
-    	<table class="success-details">
-    		<tr>
-    			<td>
-    				<center>Thank you for sharing a File!</center>
-    			</td>
-    		</tr>
+        <table class="success-details">
+            <tr>
+                <td>
+                    <center>Thank you for sharing a File!</center>
+                </td>
+            </tr>
     </div>
 </body>
 
